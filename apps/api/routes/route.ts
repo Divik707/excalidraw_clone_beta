@@ -99,5 +99,8 @@ router.post('/signin', async (req, res) => {
 
 router.post('/create-room', authMiddleware , async(req, res) => {
     // db call and check
+    res.json({
+        message: "accessed auth"
+    })
 })
 export default router;

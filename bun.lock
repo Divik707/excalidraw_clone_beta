@@ -48,6 +48,7 @@
       "name": "ws",
       "dependencies": {
         "@types/ws": "^8.18.1",
+        "jsonwebtoken": "^9.0.3",
         "ws": "^8.20.0",
       },
       "devDependencies": {
