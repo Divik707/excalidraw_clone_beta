@@ -2,7 +2,8 @@ import { Router } from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "@repo/database";
 import  jwt from "jsonwebtoken";
-import { authMiddleware, user_input_schema } from "../lib/utils";
+import { authMiddleware } from "../lib/utils";
+import { user_input_schema, JWT_SECRET } from "@repo/common";
 
 const router = Router();
 
@@ -62,12 +63,12 @@ router.post('/signin', async (req, res) => {
             })
             if(user_already_exist) {
                 if(await bcrypt.compare(password, user_already_exist.password)) {
-                    if(process.env.JWT_SECRET == null) {
+                    if(JWT_SECRET == null) {
                         return res.json({
                             message: "secret not found"
                         })
                     } else {
-                        const token = jwt.sign({id: user_already_exist.id}, process.env.JWT_SECRET, {expiresIn: '3h'})
+                        const token = jwt.sign({id: user_already_exist.id}, JWT_SECRET, {expiresIn: '3h'})
                         return res.status(200).json({
                             message: "user signed in",
                             token: token

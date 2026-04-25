@@ -1,5 +1,6 @@
 import { WebSocketServer } from 'ws';
 import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "@repo/common";
 
 const wss = new WebSocketServer({ port: 8080 });
 
@@ -15,10 +16,10 @@ wss.on('connection', function connection(ws, request) {
     }
     const token = new URLSearchParams(url.split('?')[1]).get('token');
     console.log(token)
-    if(!process.env.JWT_SECRET) {
+    if(!JWT_SECRET) {
         return;
     }
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
     if(!decoded) {
         ws.close();
         return;
@@ -27,3 +28,5 @@ wss.on('connection', function connection(ws, request) {
         ws.send('pong')
     })
 });
+
+export { WebSocketServer };

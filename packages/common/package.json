@@ -1,5 +1,8 @@
 {
-  "name": "ws",
+  "name": "@repo/common",
+  "exports": {
+    ".": "./index.ts"
+  },
   "module": "index.ts",
   "type": "module",
   "private": true,
@@ -7,12 +10,9 @@
     "@types/bun": "latest"
   },
   "peerDependencies": {
-    "typescript": "^6.0.3"
+    "typescript": "^5"
   },
   "dependencies": {
-    "@types/ws": "^8.18.1",
-    "@repo/common": "workspace:*",
-    "jsonwebtoken": "^9.0.3",
-    "ws": "^8.20.0"
+    "zod": "^4.3.6"
   }
 }
